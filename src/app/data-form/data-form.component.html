@@ -1,18 +1,2 @@
 <h1>Add Data</h1>
-<form [formGroup]="form">
-  <div class="form-group">
-    <label for="flow">Flow</label>
-    <input formControlName="flow" id="flow" type="number" class="form-control">
-    <div *ngIf="flow.touched && flow.invalid" class="alert alert-danger">
-      <div *ngIf="flow.errors.required">Flow is required</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="pressure">Pressure</label>
-    <input formControlName="pressure" pressure="flow" type="number" class="form-control">
-    <div *ngIf="pressure.touched && pressure.invalid" class="alert alert-danger">
-      <div *ngIf="pressure.errors.required">Pressure is required</div>
-    </div>
-  </div>
-  <button class="btn btn-primary" type="submit">Add Data</button>
-</form>
+

@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.css']
 })
-export class DataFormComponent   {
+export class DataFormComponent implements OnInit {
 
   form = new FormGroup({
     flow: new FormControl('', [
@@ -17,6 +17,8 @@ export class DataFormComponent   {
 
   constructor() { }
 
+  ngOnInit(): void {
+  }
 
   get flow(){
     return this.form.get('flow');
