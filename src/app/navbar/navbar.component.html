@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light bg-light navbar-expand-md">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="navbar-item " routerLinkActive="active current"><a class="nav-link" routerLink="/add">Add data</a>
+        </li>
+        <li class="navbar-item " routerLinkActive="active current"><a class="nav-link" routerLink="/list">Data list</a>
+        </li>
+        <li *ngIf="!authService.isLoggedIn()" class="navbar-item "><a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="authService.isLoggedIn()" class="navbar-item "><a href="#" class="nav-link"
+            (click)="authService.logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

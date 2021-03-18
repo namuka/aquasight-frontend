@@ -1,1 +1,94 @@
-<p>view-data works!</p>
+<div class="container">
+  <div class="m-3">
+    <div class="clearfix">
+      <h2 class="float-left">Data by Table</h2>
+      <p class="float-right">
+        <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+          Table Collapse Toggle
+        </button>
+      </p>
+    </div>
+
+    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+
+      <mat-spinner color="primary"></mat-spinner>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" #dateRangeStart
+            (dateChange)="filterByDateRange(dateRangeStart, dateRangeEnd)">
+          <input matEndDate placeholder="End date" #dateRangeEnd
+            (dateChange)="filterByDateRange(dateRangeStart, dateRangeEnd)">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" sortable="id" (sort)="onSort($event)">#</th>
+            <th scope="col" sortable="flow" (sort)="onSort($event)">Flow</th>
+            <th scope="col" sortable="pressure" (sort)="onSort($event)">Pressure</th>
+            <th scope="col" sortable="timeStamp" (sort)="onSort($event)">Time Stamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let one of list | slice: (page-1) * pageSize : page * pageSize; index as i"> -->
+          <tr *ngFor="let one of list ">
+            <!-- <th scope="row">{{ (page -1) * pageSize + i + 1 }}</th> -->
+            <th scope="row">{{ one.id }}</th>
+            <td>{{ one.flow | number }}</td>
+            <td>{{ one.pressure | number }}</td>
+            <td>{{ one.timeStamp | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          (pageChange)="refreshData()" [boundaryLinks]="true" class="d-flex justify-content-center">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshData()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="5">5 items per page</option>
+          <option [ngValue]="10">10 items per page</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="m-2 pb-5 pt-5">
+      <div class="clearfix">
+        <h2 class="float-left">Data by Bar Chart</h2>
+        <button class="btn btn-outline-primary float-right" (click)="open(mymodal)">View Char in popup dialog</button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3 pt-5">
+          <canvas baseChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+            [options]="chartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Data by Bar Chart</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <canvas baseChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+            [options]="chartOptions">
+          </canvas>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
