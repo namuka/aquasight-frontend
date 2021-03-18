@@ -12,7 +12,7 @@ import { Unauthorized } from '../common/unauthorized';
   providedIn: 'root'
 })
 export class DataService implements OnInit {
-  private url = 'http://localhost:8000';
+  private url = 'https://aquasight-backend-api.herokuapp.com';
 
   constructor(private httpClient: HttpClient) { }
 

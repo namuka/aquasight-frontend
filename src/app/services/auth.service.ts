@@ -28,7 +28,7 @@ export class AuthService {
   }*/
 
   signin(credentials): Observable<any> {
-    return this.http.post("http://localhost:8000/api/auth" + '/login', {
+    return this.http.post("https://aquasight-backend-api.herokuapp.com/api/auth" + '/login', {
       username: credentials.username,
       password: credentials.password
     }, httpOptions);
